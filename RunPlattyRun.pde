@@ -1,4 +1,4 @@
-// Version 8: Cleanup
+// Version 9: Intro
 
 int tileSize = 20;
 State current;
@@ -16,7 +16,7 @@ void changeState(State next) {
 void setup() {
   size(640, 480); //VGA for those old enough to remember
   
-  changeState(new MainGame());
+  changeState(new IntroState());
 }
 
 void draw() {
