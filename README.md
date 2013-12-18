@@ -6,9 +6,9 @@ A simple game developed using [Processing](http://processing.org/)
 Installation
 ============
 
-# Download and install "Processing" from http://processing.org/
-# Checkout this repository inside of the "sketchbook" folder.
-# Run `processing` and open `RunPlattyRun.pde`
+1. Download and install "Processing" from http://processing.org/
+1. Checkout this repository inside of the "sketchbook" folder.
+1. Run `processing` and open `RunPlattyRun.pde`
 
 Introduction
 ============
