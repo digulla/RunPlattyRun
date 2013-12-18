@@ -14,22 +14,22 @@ class Step {
     int newX = x + dx;
     int newY = y + dy;
     
-    if(dy == 0 && y == minY && newX > maxX) {
+    if(newX > maxX) {
       newX = maxX;
       dx = 0;
       dy = tileSize;
       newY += dy;
-    } else if(dx == 0 && x == maxX && newY > maxY) {
+    } else if(newY > maxY) {
       newY = maxY;
       dx = -tileSize;
       dy = 0;
       newX += dx; 
-    } else if(dy == 0 && y == maxY && newX < minX) {
+    } else if(newX < minX) {
       newX = minX;
       dx = 0;
       dy = -tileSize;
       newY += dy;
-    } else if(dx == 0 && x == minX && newY < minY) {
+    } else if(newY < minY) {
       newY = minY;
       dx = tileSize;
       dy = 0;
