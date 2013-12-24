@@ -70,12 +70,18 @@ class IntroState extends State {
     textSize(40);
     color outline = color(255,255,255);
     color fill = color(0,0,0);
-    textWithOutline("Run, Platty, Run!", width/2, height/2 - 40, outline, fill);
+    int y = height/2 - 60;
+    textWithOutline("Run, Platty, Run!", width/2, y, outline, fill);
+    y += 50;
     
     textSize(20);
+    textWithOutline("Use cursor keys to evade the hungry crocodiles", width/2, y, outline, fill);
+    y += 40;
+    
     outline = color(0,0,255);
     fill = color(255,255,255);
-    textWithOutline("Press any key to start", width/2, height/2 + 20, outline, fill);
+    textWithOutline("Press any key to start", width/2, y, outline, fill);
+    y += 20;
   }
   
   void draw() {
