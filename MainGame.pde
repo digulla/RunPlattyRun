@@ -61,7 +61,7 @@ class Enemy {
   boolean closeTo(int tx, int ty) {
     int dx = abs(x - tx) / tileSize;
     int dy = abs(y - ty) / tileSize;
-    println(name+" dx="+dx+" dy="+dy);
+    //println(name+" dx="+dx+" dy="+dy);
     return dx <= 1 && dy <= 1;
   }
 }
