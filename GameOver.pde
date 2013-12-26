@@ -31,12 +31,58 @@ class GameOverState extends State {
   
   void keyPressed() {
     if(key == 'y' || key == 'Y') {
-      current = new MainGame();
-      current.setup();
+      changeState(new MainGame());
     } else if(key == 'n' || key == 'N') {
-      exit();
+      changeState(new IntroState());
     }
   } 
+}
+
+class EnterNameState extends State {
+  MainGame main;
+  TypedInput input;
+  GameOverState nextState;
+  
+  EnterNameState(MainGame main, GameOverState nextState) {
+    this.main = main;
+    this.nextState = nextState;
+  }
+  
+  void setup() {
+    input = new TypedInput();
+    input.setup();
+    
+    textSize(24);
+    input.x = 20 + (int)textWidth("Your name?");
+    input.y = 30 + 40 + 10;
+  }
+  
+  void draw() {
+    main.draw();
+  
+    textAlign(LEFT, TOP);
+    textSize(36);
+    color outline = color(255,255,255);
+    color fill = color(255,0,0);
+    textWithOutline("You made a new highscore: " + main.score, 10, 30, outline, fill);
+    
+    fill(color(0,0,0));
+    textSize(24);
+    text("Your name?", 10, input.y);
+    
+    input.draw();
+  }
+  
+  void keyPressed() {
+    input.keyPressed();
+    
+    if(input.done) {
+      highscore.add(main.score, input.text);
+      highscore.save();
+      
+      changeState(nextState);
+    }
+  }
 }
 
 class GameOverWonState extends GameOverState {

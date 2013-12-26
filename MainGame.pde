@@ -94,8 +94,7 @@ class MainGame extends State {
   }
 
   void drawBackground() {
-    fill(174, 204, 27);
-    rect(0, 0, width, height);
+    background(174, 204, 27);
       
     fill(0);
     textAlign(LEFT, TOP);
@@ -148,11 +147,21 @@ class MainGame extends State {
   }
   
   void gameOver(Enemy e) {
-    changeState(new GameOverLostState(this, e));
+    GameOverState nextState = new GameOverLostState(this, e);
+    gameOver(nextState);
+  }
+  
+  void gameOver(GameOverState nextState) {
+    if(highscore.goodEnough(score)) {
+      changeState(new EnterNameState(this, nextState));
+    } else {
+      changeState(nextState);
+    }
   }
   
   void youWon() {
-    changeState(new GameOverWonState(this, enemies.size())); 
+    GameOverState nextState = new GameOverWonState(this, enemies.size());
+   gameOver(nextState); 
   }
   
   void movePlayer(int dx, int dy) {
