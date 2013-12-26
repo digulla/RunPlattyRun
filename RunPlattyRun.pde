@@ -2,6 +2,7 @@
 
 int tileSize = 20;
 State current;
+Highscore highscore;
 
 void mousePressed() {  
   saveFrame("frame-######.png");
@@ -15,6 +16,9 @@ void changeState(State next) {
 
 void setup() {
   size(640, 480); //VGA for those old enough to remember
+  
+  highscore = new Highscore();
+  highscore.load();
   
   changeState(new IntroState());
 }
