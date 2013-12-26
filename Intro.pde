@@ -47,6 +47,8 @@ class IntroState extends State {
   Enemy e;
   Step playerStep;
   Step enemyStep;
+  HighscoreRenderer highscoreRenderer;
+  int startFrame;
   
   void setup() {
     
@@ -60,12 +62,16 @@ class IntroState extends State {
     enemyStep = new Step();
     
     frameRate(10);
+    
+    highscoreRenderer = new HighscoreRenderer();
+    highscoreRenderer.setup();
+    highscoreRenderer.x = tileSize * 5;
+    highscoreRenderer.y = tileSize * 5;
+    
+    startFrame = frameCount;
   }
   
   void drawBackground() {
-    fill(174, 204, 27);
-    rect(0, 0, width, height);
-    
     textAlign(CENTER, TOP);
     textSize(40);
     color outline = color(255,255,255);
@@ -84,13 +90,29 @@ class IntroState extends State {
     y += 20;
   }
   
+  void drawHighscore() {
+    highscoreRenderer.draw();
+  }
+  
   void draw() {
     movePlayer();
     moveEnemy();
+
+    background(174, 204, 27);
     
-    drawBackground();
+    if(showHighscore()) {
+      drawHighscore();
+    } else {
+      drawBackground();
+    }
+    
     p.draw();
     e.draw();
+  }
+  
+  boolean showHighscore() {
+    int frame = frameCount - startFrame;
+    return (frame / 20 % 2) == 1;
   }
   
   void movePlayer() {
