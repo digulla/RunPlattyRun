@@ -10,7 +10,19 @@ class Step {
   int dx = tileSize;
   int dy = 0;
   
+  AnimatedMove mover;
+  
   void next() {
+    if(mover != null) {
+      if(!mover.finished) {
+        mover.update();
+        return;
+      } else {
+        x = mover.x;
+        y = mover.y;
+      }
+    }
+    
     int newX = x + dx;
     int newY = y + dy;
     
@@ -35,9 +47,8 @@ class Step {
       dy = 0;
       newX += dx; 
     }
-    
-    x = newX;
-    y = newY;
+
+    mover = new AnimatedMove(x,y, newX,newY, 10);    
   }
 }
 
@@ -61,7 +72,7 @@ class IntroState extends State {
 
     enemyStep = new Step();
     
-    frameRate(10);
+    frameRate(60);
     
     highscoreRenderer = new HighscoreRenderer();
     highscoreRenderer.setup();
@@ -112,19 +123,20 @@ class IntroState extends State {
   
   boolean showHighscore() {
     int frame = frameCount - startFrame;
-    return (frame / 20 % 2) == 1;
+    return (frame / 120 % 2) == 1;
   }
   
   void movePlayer() {
+    
     playerStep.next();
-    p.x = playerStep.x;
-    p.y = playerStep.y;
+    p.x = playerStep.mover.x;
+    p.y = playerStep.mover.y;
   }
   
   void moveEnemy() {
     enemyStep.next();   
-    e.x = enemyStep.x;
-    e.y = enemyStep.y;
+    e.x = enemyStep.mover.x;
+    e.y = enemyStep.mover.y;
   }
   
   void keyPressed() {
